@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    filter: '',
+    filterInput: '',
     gameList: [
       {
         codigo: '0001',
@@ -57,7 +57,29 @@ export default new Vuex.Store({
       },
     ],
   },
-  mutations: {},
-  actions: {},
+  getters: {
+    stockTotal(state) {
+      return state.gameList.reduce((accumulator, game) => {
+        accumulator = accumulator + game.stock
+        return accumulator
+      }, 0)
+    },
+    searchInput(state) {
+      return state.gameList.filter(game => 
+        game.nombre.toLowerCase().includes(state.filterInput.toLowerCase())
+      )
+    },
+
+  },
+  mutations: {
+    SET_FILTER(state, newFilter) {
+      state.filterInput = newFilter
+    }
+  },
+  actions: {
+    getFilter(context, newFilter) {
+      context.commit("SET_FILTER", newFilter)
+    }
+  },
   modules: {},
 });

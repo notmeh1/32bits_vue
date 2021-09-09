@@ -2,7 +2,7 @@
   <v-toolbar color="dark" dark>
     <v-toolbar-items class="hidden-sm-and-down">
 
-      <v-btn text to="/"> Inicio </v-btn>
+      <v-btn text to="/index"> Inicio </v-btn>
 
       <v-divider vertical></v-divider>
 

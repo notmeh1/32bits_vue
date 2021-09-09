@@ -12,8 +12,8 @@
         </thead>
         <tbody>
           <tr
-            v-for="(game, $index) in games"
-            :key="$index"
+            v-for="game in gameList"
+            :key="game.codigo"
             :style="{
               'background-color': game.color,
               color: 'black',
@@ -28,23 +28,22 @@
         </tbody>
       </template>
     </v-simple-table>
-        <v-text-field placeholder="Filtrar" v-model="filterInput"></v-text-field>
   </div>
 </template>
 
 <script>
 export default {
   name: "Gameul",
-  data: () => ({
-      filterInput: '',
-  }),
   computed: {
     games() {
       return this.$store.state.gameList;
     },
   },
-  methods: {
-      
+  props: {
+    gameList: {
+      type: Array,
+      required: true,
+    },
   },
 };
 </script>

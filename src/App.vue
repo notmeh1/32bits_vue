@@ -3,6 +3,7 @@
     <v-container fluid>
       <Navbar />
       <v-main>
+        <!-- add transition-->
         <router-view />
       </v-main>
     </v-container>
@@ -22,3 +23,5 @@ export default {
   }),
 };
 </script>
+
+<style lang="scss" scoped></style>
