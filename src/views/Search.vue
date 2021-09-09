@@ -4,7 +4,7 @@
       <v-col align="center">
         <h1>Lista de juegos</h1>
         <p>
-          Cantidad de productos con stock: {{ $store.state.gameList.length }}
+          Cantidad de productos registrados: {{ $store.state.gameList.length }}
         </p>
         <p>Cantidad de stock total: {{ $store.getters.stockTotal }}</p>
         <Gameul :gameList="$store.state.gameList" />
@@ -18,9 +18,9 @@
               Filtrar lista por nombre
             </v-expansion-panel-header>
             <v-expansion-panel-content>
-              <Gameul :gameList="$store.getters.searchInput" />
+              <Gameul :gameList="$store.getters.searchByName" />
               <v-text-field
-                placeholder="Filtrar"
+                placeholder="Nombre del juego"
                 :value="$store.state.filterInput"
                 @input="$store.dispatch('getFilter', $event)"
               />

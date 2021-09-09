@@ -12,8 +12,8 @@
         </thead>
         <tbody>
           <tr
-            v-for="game in gameList"
-            :key="game.codigo"
+            v-for="(game, $index) in gameList"
+            :key="$index"
             :style="{
               'background-color': game.color,
               color: 'black',
