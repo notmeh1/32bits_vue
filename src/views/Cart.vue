@@ -1,0 +1,9 @@
+<template>
+    <div>
+        <v-row>
+            <v-col>
+                <h1>Carrito</h1>
+            </v-col>
+        </v-row>
+    </div>
+</template>

@@ -88,8 +88,9 @@ export default new Vuex.Store({
     SET_FILTER(state, newFilter) {
       state.filterInput = newFilter;
     },
-    SELL_GAME(state, gameList) {
-      return state.gameList.splice(gameList, 1)
+    SELL_GAME(state, gameIndex) {
+      console.log(gameIndex)
+      return state.gameList[gameIndex].stock--
     }
   },
   actions: {

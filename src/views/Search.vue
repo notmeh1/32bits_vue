@@ -7,7 +7,7 @@
           Cantidad de productos registrados: {{ $store.state.gameList.length }}
         </p>
         <p>Cantidad de stock total: {{ $store.getters.stockTotal }}</p>
-        <Gameul :gameList="$store.state.gameList" />
+        <Gameul :gameList="$store.state.gameList" mode="default"/>
       </v-col>
     </v-row>
     <v-row>
@@ -18,12 +18,7 @@
               Filtrar lista por nombre
             </v-expansion-panel-header>
             <v-expansion-panel-content>
-              <Gameul :gameList="$store.getters.searchByName" />
-              <v-text-field
-                placeholder="Nombre del juego"
-                :value="$store.state.filterInput"
-                @input="$store.dispatch('getFilter', $event)"
-              />
+              <Gameul :gameList="$store.getters.searchByName" mode="filter"/>
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>

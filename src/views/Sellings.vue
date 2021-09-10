@@ -12,17 +12,17 @@
     </v-row>
     <v-row>
       <v-col>
-        <GameulMono :gameList="$store.getters.filterByStock" />
+        <Gameul :gameList="$store.getters.filterByStock" mode="sell"/>
       </v-col>
     </v-row>
   </div>
 </template>
 
 <script>
-import GameulMono from "../components/game_ul_mono.vue";
+import Gameul from "../components/game_ul.vue";
 export default {
   components: {
-    GameulMono,
+    Gameul,
   },
 };
 </script>
