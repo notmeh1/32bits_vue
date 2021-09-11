@@ -89,16 +89,27 @@ export default new Vuex.Store({
       state.filterInput = newFilter;
     },
     SELL_GAME(state, gameIndex) {
-      console.log(gameIndex)
+      console.log(state.gameList[gameIndex])
       return state.gameList[gameIndex].stock--
-    }
+    },
+    ADD_SELL(state, gameData) {
+      console.log(gameData)
+      state.gamesSelled.push(this.state.gameList[gameData])
+    },
   },
   actions: {
     getFilter(context, newFilter) {
       context.commit("SET_FILTER", newFilter);
     },
-    sellGame(context, newDel) {
+    sellGame(context, game) {
+      context.dispatch("delGame", game)
+      context.dispatch("addSell", game)
+    },
+    delGame(context, newDel) {
       context.commit("SELL_GAME", newDel)
+    },
+    addSell(context, newSell) {
+      context.commit("ADD_SELL", newSell)
     }
   },
   modules: {},
