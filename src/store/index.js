@@ -73,6 +73,12 @@ export default new Vuex.Store({
         return accumulator;
       }, 0);
     },
+    sellTotal(state) {
+      return state.gamesSelled.reduce((accumulator, sell) => {
+        accumulator = accumulator + sell.precio;
+        return accumulator;
+      }, 0)
+    },
     searchByName(state) {
       return state.gameList.filter(game =>
         game.nombre.toLowerCase().includes(state.filterInput.toLowerCase())
@@ -89,12 +95,11 @@ export default new Vuex.Store({
       state.filterInput = newFilter;
     },
     SELL_GAME(state, gameIndex) {
-      console.log(state.gameList[gameIndex])
       return state.gameList[gameIndex].stock--
     },
     ADD_SELL(state, gameData) {
-      console.log(gameData)
       state.gamesSelled.push(this.state.gameList[gameData])
+      console.log(this.state.gamesSelled)
     },
   },
   actions: {

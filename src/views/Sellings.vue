@@ -7,7 +7,6 @@
           Cantidad de productos con stock:
           {{ $store.getters.filterByStock.length }}
         </p>
-        <p>Cantidad de stock total: {{ $store.getters.stockTotal }}</p>
       </v-col>
     </v-row>
     <v-row>

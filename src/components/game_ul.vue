@@ -8,7 +8,9 @@
             <th class="text-left">Nombre</th>
             <th class="text-left">Stock</th>
             <th class="text-left">Precio</th>
-            <th class="text-left" v-if="mode === 'sell'">---</th>
+            <th class="text-left" v-if="mode === 'sell' || mode === 'default'">
+              ---
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -37,6 +39,9 @@
                 @click="$store.dispatch('sellGame', $index)"
                 >Vender</v-btn
               >
+            </td>
+            <td v-if="mode === 'default'">
+              <v-btn elevation="2" depressed color="success">Comprar</v-btn>
             </td>
           </tr>
         </tbody>
