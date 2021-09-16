@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-simple-table dark>
-      <template v-slot:default>
+      <template>
         <thead>
           <tr>
             <th class="text-left">Codigo</th>
@@ -41,7 +41,9 @@
               >
             </td>
             <td v-if="mode === 'default'">
-              <v-btn elevation="2" depressed color="success">Comprar</v-btn>
+              <v-btn elevation="2" depressed color="success"
+                ><v-icon>mdi-cart-plus</v-icon></v-btn
+              >
             </td>
           </tr>
         </tbody>
@@ -53,15 +55,35 @@
       :value="$store.state.filterInput"
       @input="$store.dispatch('getFilter', $event)"
     />
+    <v-btn dark color="orange darken-2" @click="snackbar = true">
+      Open Snackbar
+    </v-btn>
+    <v-snackbar v-model="snackbar" :timeout="timeout" color="success">
+      {{ text }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn color="blue" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
 <script>
 export default {
   name: "Gameul",
+  data: () => ({
+    snackbar: false,
+    text: "El producto se vendio exitosamente",
+    timeout: 2000,
+  }),
   computed: {
-    games() {
+    getGameList() {
       return this.$store.state.gameList;
+    },
+    getSuccess() {
+      return this.$store.state.sellSuccess;
     },
   },
   props: {

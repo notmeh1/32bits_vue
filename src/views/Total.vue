@@ -7,5 +7,19 @@
                 <p v-else>No se han realizado ventas todavía</p>
             </v-col>
         </v-row>
+        <v-row>
+            <v-col>
+                <Sellul :gamesSelled="$store.state.gamesSelled" v-if="$store.getters.sellTotal > 0"/>
+            </v-col>
+        </v-row>
     </div>
 </template>
+
+<script>
+import Sellul from '../components/sell_ul.vue'
+export default {
+    components: {
+        Sellul,
+    }
+}
+</script>

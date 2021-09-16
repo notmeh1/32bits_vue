@@ -3,10 +3,19 @@
     <v-container fluid>
       <Navbar />
       <v-main>
+        <v-row>
+          <v-col> </v-col>
+          <v-col cols="10">
+            <transition name="fade">
+
+            <router-view />
+            </transition>
+          </v-col>
+          <v-col> </v-col>
+        </v-row>
         <!-- add transition-->
-        <router-view />
       </v-main>
-      <Footer/>
+      <Footer />
     </v-container>
   </v-app>
 </template>
@@ -27,4 +36,11 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .1s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0%;
+}
+</style>

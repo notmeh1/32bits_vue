@@ -3,6 +3,11 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
+const delay = (ms) =>
+  new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+
 export default new Vuex.Store({
   state: {
     filterInput: "",
@@ -99,21 +104,24 @@ export default new Vuex.Store({
     },
     ADD_SELL(state, gameData) {
       state.gamesSelled.push(this.state.gameList[gameData])
-      console.log(this.state.gamesSelled)
+
+      console.log(this.state.gameList[gameData])
     },
   },
   actions: {
     getFilter(context, newFilter) {
       context.commit("SET_FILTER", newFilter);
     },
-    sellGame(context, game) {
-      context.dispatch("delGame", game)
-      context.dispatch("addSell", game)
+    async sellGame(context, game) {
+      await context.dispatch("delGame", game)
+      await context.dispatch("addSell", game)
     },
-    delGame(context, newDel) {
+    async delGame(context, newDel) {
+      await delay(2000)
       context.commit("SELL_GAME", newDel)
     },
-    addSell(context, newSell) {
+    async addSell(context, newSell) {
+      await delay(1000)
       context.commit("ADD_SELL", newSell)
     }
   },
