@@ -8,15 +8,6 @@
         </p>
         <p>Cantidad de stock total: {{ $store.getters.stockTotal }}</p>
         <Gameul :gameList="$store.state.gameList" mode="default" />
-        <v-snackbar
-          v-model="successAdd.snackbar"
-          :timeout="successAdd.timeout"
-          color="success"
-          right
-        >
-          <v-icon class="mx-3">mdi-check</v-icon>
-          {{ successAdd.text }}
-        </v-snackbar>
       </v-col>
     </v-row>
     <v-row>
@@ -37,13 +28,10 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 import Gameul from "../components/game_ul.vue";
 export default {
   name: "Search",
-  computed: {
-    ...mapState(["successAdd"]),
-  },
+
   components: {
     Gameul,
   },

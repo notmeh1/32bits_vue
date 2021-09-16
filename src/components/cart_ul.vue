@@ -17,7 +17,7 @@
       </template>
     </v-simple-table>
     <div class="text-center my-3">
-      <v-btn color="success" align="center">Realizar compra</v-btn>
+      <v-btn color="success" align="center" @click="$store.dispatch('checkOut')">Realizar compra</v-btn>
     </div>
   </div>
 </template>
@@ -25,6 +25,7 @@
 <script>
 export default {
   computed: {
+    
     getCart() {
       return this.$store.state.cart;
     },

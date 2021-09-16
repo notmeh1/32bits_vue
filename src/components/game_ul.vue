@@ -63,7 +63,7 @@
     />
   </div>
 </template>
-
+<!-- intentar mover snackbar a app.vue (snackbar global) -->
 <script>
 export default {
   name: "Gameul",

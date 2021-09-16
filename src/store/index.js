@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import router from "../router";
 
 Vue.use(Vuex);
 
@@ -20,6 +21,10 @@ export default new Vuex.Store({
       snackbar: false,
       text: "El producto se vendió exitosamente",
       timeout: 2500,
+    },
+    checkoutSuccess: {
+      overlay: false,
+      opacity: 1,
     },
     cart: [],
     gamesSelled: [],
@@ -111,6 +116,17 @@ export default new Vuex.Store({
     ADD_GAME(state, gameData) {
       this.state.successAdd.snackbar = true;
       state.cart.push(this.state.gameList[gameData]);
+      return state.gameList[gameData].stock--;
+    },
+    async CHECKOUT(state) {
+      this.state.checkoutSuccess.overlay = true
+      await delay(5000)
+      this.state.gamesSelled.push(...this.state.cart)
+      console.log(this.state.gamesSelled)
+      state.cart.splice(0, state.cart.length)
+      this.state.checkoutSuccess.overlay = false
+      router.push("/cart/success")
+
     },
     SELL_GAME(state, gameIndex) {
       this.state.successSell.snackbar = true;
@@ -127,6 +143,9 @@ export default new Vuex.Store({
     },
     async addCart(context, game) {
       await context.dispatch("addGame", game);
+    },
+    async checkOut(context, game) {
+      context.commit("CHECKOUT", game)
     },
     async addGame(context, newGame) {
       context.commit("ADD_GAME", newGame);
