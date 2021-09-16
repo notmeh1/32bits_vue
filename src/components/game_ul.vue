@@ -42,12 +42,14 @@
             </td>
             <td v-if="mode === 'default'">
               <v-btn
+                v-if="game.stock > 0"
                 elevation="2"
                 depressed
                 color="success"
                 @click="$store.dispatch('addCart', $index)"
                 ><v-icon>mdi-cart-plus</v-icon></v-btn
               >
+              <v-icon v-else>mdi-cart-off</v-icon>
             </td>
           </tr>
         </tbody>

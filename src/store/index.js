@@ -19,7 +19,7 @@ export default new Vuex.Store({
     successSell: {
       snackbar: false,
       text: "El producto se vendió exitosamente",
-      timeout: 5000,
+      timeout: 2500,
     },
     cart: [],
     gamesSelled: [],
