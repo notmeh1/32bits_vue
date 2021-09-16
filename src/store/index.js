@@ -11,6 +11,17 @@ const delay = (ms) =>
 export default new Vuex.Store({
   state: {
     filterInput: "",
+    successAdd: {
+      snackbar: false,
+      text: "El producto se agregó al carrito",
+      timeout: 2500,
+    },
+    successSell: {
+      snackbar: false,
+      text: "El producto se vendió exitosamente",
+      timeout: 5000,
+    },
+    cart: [],
     gamesSelled: [],
     gameList: [
       {
@@ -68,7 +79,7 @@ export default new Vuex.Store({
         precio: 50000,
         color: "purple",
         destacado: false,
-      }
+      },
     ],
   },
   getters: {
@@ -82,48 +93,56 @@ export default new Vuex.Store({
       return state.gamesSelled.reduce((accumulator, sell) => {
         accumulator = accumulator + sell.precio;
         return accumulator;
-      }, 0)
+      }, 0);
     },
     searchByName(state) {
-      return state.gameList.filter(game =>
+      return state.gameList.filter((game) =>
         game.nombre.toLowerCase().includes(state.filterInput.toLowerCase())
       );
     },
     filterByStock(state) {
-      return state.gameList.filter(game =>
-        game.stock > 0)
+      return state.gameList.filter((game) => game.stock > 0);
     },
-
   },
   mutations: {
     SET_FILTER(state, newFilter) {
       state.filterInput = newFilter;
     },
+    ADD_GAME(state, gameData) {
+      this.state.successAdd.snackbar = true;
+      state.cart.push(this.state.gameList[gameData]);
+    },
     SELL_GAME(state, gameIndex) {
-      return state.gameList[gameIndex].stock--
+      this.state.successSell.snackbar = true;
+      return state.gameList[gameIndex].stock--;
     },
     ADD_SELL(state, gameData) {
-      state.gamesSelled.push(this.state.gameList[gameData])
-
-      console.log(this.state.gameList[gameData])
+      state.gamesSelled.push(this.state.gameList[gameData]);
+      console.log(this.state.gamesSelled);
     },
   },
   actions: {
     getFilter(context, newFilter) {
       context.commit("SET_FILTER", newFilter);
     },
+    async addCart(context, game) {
+      await context.dispatch("addGame", game);
+    },
+    async addGame(context, newGame) {
+      context.commit("ADD_GAME", newGame);
+    },
     async sellGame(context, game) {
-      await context.dispatch("delGame", game)
-      await context.dispatch("addSell", game)
+      await context.dispatch("delGame", game);
+      await context.dispatch("addSell", game);
     },
     async delGame(context, newDel) {
-      await delay(2000)
-      context.commit("SELL_GAME", newDel)
+      await delay(2000);
+      context.commit("SELL_GAME", newDel);
     },
     async addSell(context, newSell) {
-      await delay(1000)
-      context.commit("ADD_SELL", newSell)
-    }
+      await delay(1000);
+      context.commit("ADD_SELL", newSell);
+    },
   },
   modules: {},
 });
